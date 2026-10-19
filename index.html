@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Warun Games - Dog Run</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="stage" id="stage">
+    <div class="background" id="background"></div>
+    <div id="obstacles"></div>
+    <img src="resources/Idle (1).png" class="dog" id="dog" alt="dog">
+
+    <div class="hud">
+        <div id="score">Score 0</div>
+        <div id="bombs">Bombs 0/20</div>
+        <div id="best">Best 0</div>
+    </div>
+    <div class="hud-right">
+        <span id="level">Speed 1</span>
+        <button class="icon-btn" id="muteBtn" title="Mute (M)">🔊</button>
+        <button class="icon-btn" id="pauseBtn" title="Pause (P)">⏸</button>
+    </div>
+
+    <!-- Start screen -->
+    <div class="overlay visible" id="start">
+        <div class="title">DOG RUN</div>
+        <div class="subtitle">Jump over the bombs. Get past 20 of them to win!</div>
+        <table class="controls">
+            <tr><td><kbd>Space</kbd> <kbd>↑</kbd> <kbd>W</kbd></td><td>Jump (press again in the air to double jump)</td></tr>
+            <tr><td><kbd>↓</kbd> <kbd>S</kbd></td><td>Slide under flying bombs / drop fast</td></tr>
+            <tr><td><kbd>←</kbd> <kbd>→</kbd> <kbd>A</kbd> <kbd>D</kbd></td><td>Move back / forward</td></tr>
+            <tr><td><kbd>P</kbd> <kbd>Esc</kbd></td><td>Pause</td></tr>
+            <tr><td><kbd>M</kbd></td><td>Mute sound</td></tr>
+            <tr><td><kbd>R</kbd></td><td>Restart</td></tr>
+        </table>
+        <button class="btn" id="startBtn">Start (Enter)</button>
+    </div>
+
+    <!-- Pause screen -->
+    <div class="overlay" id="pause">
+        <div class="title">PAUSED</div>
+        <button class="btn" id="resumeBtn">Resume (P)</button>
+    </div>
+
+    <!-- Game over screen -->
+    <div class="overlay dark" id="end">
+        <div class="title">GAME OVER</div>
+        <div class="subtitle">Your Score</div>
+        <div class="big-score" id="endscore">0</div>
+        <div class="subtitle" id="endbest"></div>
+        <button class="btn" id="retryBtn">Try Again (Enter)</button>
+    </div>
+
+    <!-- Win screen -->
+    <div class="overlay dark" id="win">
+        <div class="title">YOU WON!</div>
+        <div class="subtitle">Final Score</div>
+        <div class="big-score" id="winscore">0</div>
+        <div class="subtitle" id="winbest"></div>
+        <button class="btn" id="againBtn">Play Again (Enter)</button>
+    </div>
+</div>
+
+<div class="rotate-hint">↻ Turn your phone sideways for a bigger screen</div>
+
+<!-- On-screen buttons for phones and tablets -->
+<div class="touch-controls" id="touchControls">
+    <div class="touch-group">
+        <button class="touch-btn" data-key="left">◀</button>
+        <button class="touch-btn" data-key="right">▶</button>
+    </div>
+    <div class="touch-group">
+        <button class="touch-btn" data-key="down">▼</button>
+        <button class="touch-btn big" data-key="jump">▲</button>
+    </div>
+</div>
+
+<audio id="jumpSound" src="resources/jump.wav" preload="auto"></audio>
+<audio id="endSound" src="resources/gameover.wav" preload="auto"></audio>
+<audio id="winSound" src="resources/win.wav" preload="auto"></audio>
+
+<script src="script.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #05051a;
+    font-family: "Comic Sans MS", "Chalkboard SE", cursive, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+/* Fixed 1920x864 game world, scaled to fit the window by script.js */
+.stage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1920px;
+    height: 864px;
+    transform-origin: center center;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+}
+
+.background {
+    position: absolute;
+    inset: 0;
+    background-image: url("resources/background.jpg");
+    background-size: 1920px 864px;
+    background-repeat: repeat-x;
+}
+
+.dog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 230px;
+    will-change: transform;
+    pointer-events: none;
+}
+
+.box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 180px;
+    background-image: url("resources/box.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    will-change: transform;
+}
+
+/* Flying bombs glow red so they are easy to tell apart */
+.box.flying {
+    filter: drop-shadow(0 0 18px rgba(255, 70, 40, 0.9));
+}
+
+/* HUD */
+.hud,
+.hud-right {
+    position: absolute;
+    top: 24px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+.hud {
+    left: 36px;
+}
+
+.hud-right {
+    right: 36px;
+    gap: 18px;
+}
+
+#best {
+    color: #ffe14d;
+}
+
+.icon-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 30px;
+    border: none;
+    border-radius: 16px;
+    background: rgba(59, 2, 87, 0.75);
+    color: #fff;
+    cursor: pointer;
+}
+
+.icon-btn:hover {
+    background: rgb(17, 1, 49);
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background: rgba(5, 5, 30, 0.55);
+    color: wheat;
+    font-weight: bold;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.overlay.dark {
+    background-image: url("resources/gameover.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.title {
+    font-size: 110px;
+    color: hwb(59 0% 0%);
+    text-shadow: 0 6px 0 #6b2c00, 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+.subtitle {
+    font-size: 44px;
+    color: hwb(59 0% 0%);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+.big-score {
+    font-size: 90px;
+    color: #fff;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.controls {
+    font-size: 30px;
+    color: #fff;
+    border-spacing: 24px 10px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+    padding: 12px 20px;
+}
+
+.controls td:first-child {
+    text-align: right;
+    white-space: nowrap;
+}
+
+kbd {
+    display: inline-block;
+    min-width: 46px;
+    padding: 2px 12px;
+    border-radius: 10px;
+    background: #f0e5e5;
+    color: #2a0a40;
+    box-shadow: 0 4px 0 #8c7a8f;
+    font-family: inherit;
+    font-size: 26px;
+    text-align: center;
+}
+
+.btn {
+    margin-top: 30px;
+    padding: 14px 50px;
+    color: rgb(240, 229, 229);
+    font-size: 40px;
+    font-family: inherit;
+    font-weight: 1000;
+    background-color: rgb(59, 2, 87);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.15s, background-color 0.15s;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+    background-color: rgb(17, 1, 49);
+    color: aliceblue;
+}
+
+/* Touch controls (only shown on touch screens) */
+.touch-controls {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    padding: 0 16px;
+    display: none;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.touch-group {
+    display: flex;
+    gap: 14px;
+}
+
+.touch-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    background: rgba(59, 2, 87, 0.55);
+    color: #fff;
+    pointer-events: auto;
+    touch-action: none;
+}
+
+.touch-btn.big {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+}
+
+.touch-btn.pressed {
+    background: rgba(255, 225, 77, 0.6);
+}
+
+.rotate-hint {
+    position: fixed;
+    top: 24px;
+    left: 16px;
+    right: 16px;
+    display: none;
+    color: #ffe14d;
+    font-size: 18px;
+    text-align: center;
+}
+
+@media (pointer: coarse) {
+    .touch-controls {
+        display: flex;
+    }
+}
+
+@media (pointer: coarse) and (orientation: portrait) {
+    .rotate-hint {
+        display: block;
+    }
+}
